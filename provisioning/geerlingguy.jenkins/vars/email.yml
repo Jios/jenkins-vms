@@ -1,0 +1,14 @@
+---
+
+email_name: ABS
+email_address: abs@tutk.com 	#"autobuild@tutk.com"
+email_password: HAchaq-g2*e6 	#"Juda5017"
+
+email_admin: TUTK AutoBuild <abs@tutk.com>
+
+
+# email_mail_descriptor: hudson.tasks.Mailer
+email_smtpHost: tutk-com.mail.protection.outlook.com
+email_useSsl: false
+email_smtpPort: 25
+email_charset: UTF-8

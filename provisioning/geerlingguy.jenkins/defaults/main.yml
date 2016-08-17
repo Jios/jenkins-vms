@@ -1,0 +1,65 @@
+---
+jenkins_connection_delay: 5
+jenkins_connection_retries: 60
+jenkins_hostname: localhost
+jenkins_http_port: 8080
+jenkins_jar_location: /opt/jenkins-cli.jar
+
+jenkins_master_plugins:
+  - swarm
+
+jenkins_plugins:
+  - git
+  - workflow-aggregator # pipeline
+  - maven-plugin
+  - groovy
+  - groovy-postbuild
+  - python
+  - ruby
+  - credentials
+  - credentials-binding
+  - plain-credentials
+  - bitbucket
+  - bitbucket-approve
+  - bitbucket-build-status-notifier
+  - bitbucket-pullrequest-builder
+  - bitbucket-oauth
+  - gitlab-plugin
+  - github-organization-folder
+  - ansicolor
+  - ssh
+  - ssh-slaves
+  - jira
+  - jenkins-jira-issue-updater
+  - confluence-publisher
+  - ansible
+  - gradle
+  - slack
+  - cucumber-slack-notifier
+  - job-dsl
+  - rebuild
+  - artifactdeployer
+  - copy-project-link
+  - envinject
+  - htmlpublisher
+  - http-post
+  - summary_report
+  - xunit
+
+jenkins_url_prefix: ""
+jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
+
+jenkins_admin_username: admin
+jenkins_admin_password: admin
+jenkins_admin_password_file: ""
+
+
+jenkins_path: /var/lib/jenkins
+jenkins_swarm_path: /var/lib/jenkins/swarm
+jenkins_init_groovy_path: /var/lib/jenkins/init.groovy.d
+
+jenkins_init_changes:
+  - option: "JENKINS_ARGS"
+    value: "--prefix={{ jenkins_url_prefix }}"
+  - option: "JENKINS_JAVA_OPTIONS"
+    value: "{{ jenkins_java_options }}"

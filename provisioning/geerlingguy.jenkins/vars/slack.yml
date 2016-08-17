@@ -1,0 +1,14 @@
+# 
+jenkins_TEAM: "tutk-kalay"
+jenkins_TOKEN: "nLIgN4qKWOKH32e5mXiuKCww"
+jenkins_CHANNEL: "#build"
+jenkins_URL: "http://172.20.1.20:8080/"
+
+# Cucumber Report Slack Notifier
+jenkins_WEBHOOK_ENDPOINT: "https://hooks.slack.com/services/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"
+
+# Slack Webhook Settings
+jenkins_OUTGING_WEBHOOK_TOKEN: "RDCJuQrXUj4x5xXR9e2FL0Fo"
+jenkins_OUTGING_WEBHOOK_ENDPOINT: "slackwebhook"
+
+ 

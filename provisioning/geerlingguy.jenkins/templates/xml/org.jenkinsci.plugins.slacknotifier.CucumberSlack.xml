@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jenkinsci.plugins.slacknotifier.CucumberSlack_-CucumberSlackDescriptor plugin="cucumber-slack-notifier@0.8.3">
+  <webHookEndpoint>{{ jenkins_WEBHOOK_ENDPOINT }}</webHookEndpoint>
+</org.jenkinsci.plugins.slacknotifier.CucumberSlack_-CucumberSlackDescriptor>

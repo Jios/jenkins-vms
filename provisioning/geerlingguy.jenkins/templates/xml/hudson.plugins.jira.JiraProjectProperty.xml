@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.plugins.jira.JiraProjectProperty_-DescriptorImpl plugin="jira@2.2.1">
+  <sites>
+    <hudson.plugins.jira.JiraSite>
+      <url>{{ jira_url }}</url>
+      <useHTTPAuth>{{ jira_useHTTPAuth }}</useHTTPAuth>
+      <userName>{{ email_address }}</userName>
+      <password>{{ email_password }}</password>
+      <supportsWikiStyleComment>{{ jira_supportsWikiStyleComment }}</supportsWikiStyleComment>
+      <recordScmChanges>{{ jira_recordScmChanges }}</recordScmChanges>
+      <userPattern>([a-zA-Z][a-zA-Z0-9_]+-[1-9][0-9]*)([^.]|\.[^0-9]|\.$|$)</userPattern>
+      <updateJiraIssueForAllStatus>{{ jira_updateJiraIssueForAllStatus }}</updateJiraIssueForAllStatus>
+      <timeout>{{ jira_timeout }}</timeout>
+      <dateTimePattern></dateTimePattern>
+      <appendChangeTimestamp>{{ jira_appendChangeTimestamp }}</appendChangeTimestamp>
+    </hudson.plugins.jira.JiraSite>
+  </sites>
+</hudson.plugins.jira.JiraProjectProperty_-DescriptorImpl>

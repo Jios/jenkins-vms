@@ -1,0 +1,14 @@
+---
+
+groovy_templates:
+  - admin-email.groovy
+  - credential.groovy
+  - mail-server.groovy
+  - git.groovy
+  - slack.groovy
+  - run-swarm.groovy
+
+xml_templates: 
+  - hudson.plugins.jira.JiraProjectProperty.xml # jira
+  - org.jenkinsci.plugins.slacknotifier.CucumberSlack.xml
+  - jenkins.plugins.slack.webhook.GlobalConfig.xml

@@ -1,0 +1,9 @@
+---
+
+- name: Configure Jenkins default users.
+  template:
+    src: basic-security.groovy
+    dest: "{{ jenkins_init_groovy_path }}/basic-security.groovy"
+  register: jenkins_users_config
+  when: (jenkins_install_package_deb is defined and jenkins_install_package_deb.changed) or
+        (jenkins_install_package_rh is defined and jenkins_install_package_rh.changed)

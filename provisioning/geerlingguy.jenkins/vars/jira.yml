@@ -1,0 +1,13 @@
+---
+
+jira_url: http://jira.tutk.com/
+jira_useHTTPAuth: "false"
+jira_userName: iotc_tutk
+jira_password: woZ3DXZTMzlM/xBuQNx5MXU0AtFuBN2v/jgnNQQCD7M= #bakEthe2
+jira_supportsWikiStyleComment: "false"
+jira_recordScmChanges: "false"
+# jira_userPattern: "([a-zA-Z][a-zA-Z0-9_]+-[1-9][0-9]*)([^.]|\.[^0-9]|\.$|$)"
+jira_updateJiraIssueForAllStatus: "true"
+jira_timeout: 10
+# jira_dateTimePattern: 
+jira_appendChangeTimestamp: "false"

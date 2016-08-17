@@ -1,0 +1,43 @@
+---
+
+# include var files
+- name: Include plugin variables
+  include_vars: plugin.yml
+
+- name: Include email plugin variables
+  include_vars: email.yml
+
+- name: Include jira plugin variables
+  include_vars: jira.yml
+
+- name: Include slack plugin variables
+  include_vars: slack.yml
+
+
+
+# copy templates to remote machines
+- name: Configure plugins with Groovy templates
+  template:
+    src: "groovy/{{ item }}"
+    dest: "{{ jenkins_init_groovy_path }}/{{ item }}"
+  register: jenkins_plugin_config
+  with_items:
+    "{{ groovy_templates }}"
+
+- name: Configure plugins with XML templates
+  template:
+    src: "xml/{{ item }}"
+    dest: "{{ jenkins_path }}/{{ item }}"
+  register: jenkins_plugin_config
+  with_items:
+    "{{ xml_templates }}"
+
+
+- name: Reload Jenkins configuration using password.
+  command: >
+    java -jar {{ jenkins_jar_location }} -s http://{{ jenkins_hostname }}:{{ jenkins_http_port }}{{ jenkins_url_prefix | default('') }}/
+    reload-configuration
+    --username {{ jenkins_admin_username }}
+    --password {{ jenkins_admin_password }}
+  when: jenkins_admin_password != "" or jenkins_plugin_config.changed
+  notify: restart jenkins
