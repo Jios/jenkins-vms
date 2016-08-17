@@ -1,14 +1,15 @@
 ---
 - hosts: all
-  remote_user: vagrant
+  remote_user: jian
   gather_facts: yes
+  become: yes
 
   vars_files:
     - vars/main.yml
 
   roles:
-    # - geerlingguy.firewall
-    # - geerlingguy.ntp
+    - geerlingguy.firewall
+    - geerlingguy.ntp
     - geerlingguy.git
     - geerlingguy.java
     - geerlingguy.jenkins
