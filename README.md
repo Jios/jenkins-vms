@@ -1,5 +1,11 @@
 # Ansible Vagrant profile for a Jenkins CI server
 
+## add ssh keys to remote machines
+[master]
+$ `ssh-copy-id jian@172.20.1.20`
+[slave]
+$ `ssh-copy-id jian@172.20.1.31`	
+
 ## ansible command
 $ `ansible-playbook -i provisioning/inventory provisioning/playbook.yml`
 
