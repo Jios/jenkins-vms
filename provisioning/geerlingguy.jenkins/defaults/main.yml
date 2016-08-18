@@ -7,6 +7,7 @@ jenkins_jar_location: /opt/jenkins-cli.jar
 
 jenkins_master_plugins:
   - swarm
+jenkins_master_SlaveAgentPort: 37036
 
 jenkins_plugins:
   - git
