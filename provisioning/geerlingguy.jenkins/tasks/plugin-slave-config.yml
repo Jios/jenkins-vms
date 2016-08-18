@@ -1,0 +1,10 @@
+---
+
+- name: Configure slave plugins with Groovy templates
+  template:
+    src: "groovy/{{ item }}"
+    dest: "{{ jenkins_init_groovy_path }}/{{ item }}"
+  register: jenkins_plugin_config
+  with_items:
+    "{{ groovy_slave_templates }}"
+  when: is_slave is defined and is_slave
