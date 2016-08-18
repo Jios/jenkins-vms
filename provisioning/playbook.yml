@@ -1,7 +1,8 @@
 ---
 - hosts: all
-  remote_user: vagrant
+  remote_user: jian
   gather_facts: yes
+  become: yes
 
   vars_files:
     - vars/main.yml
