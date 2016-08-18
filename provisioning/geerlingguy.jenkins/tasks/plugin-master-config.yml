@@ -1,0 +1,10 @@
+---
+
+- name: Configure master plugins with Groovy templates
+  template:
+    src: "groovy/{{ item }}"
+    dest: "{{ jenkins_init_groovy_path }}/{{ item }}"
+  register: jenkins_plugin_config
+  with_items:
+    "{{ groovy_master_templates }}"
+  when: is_master is defined and is_master
