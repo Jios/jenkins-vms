@@ -6,6 +6,9 @@ groovy_templates:
   - mail-server.groovy
   - git.groovy
   - slack.groovy
+groovy_master_templates:
+  - slave-agent-port.groovy
+groovy_slave_templates:
   - run-swarm.groovy
 
 xml_templates: 
