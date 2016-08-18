@@ -47,6 +47,7 @@ jenkins_plugins:
   - summary_report
   - xunit
   - timestamper
+  - build-publisher
 
 jenkins_url_prefix: ""
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
