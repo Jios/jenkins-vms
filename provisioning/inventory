@@ -5,4 +5,3 @@ master  ansible_ssh_host=172.20.1.20 ansible_ssh_port=22 is_master=true
 
 [slave] 
 slave   ansible_ssh_host=172.20.1.31 ansible_ssh_port=22 is_slave=true
-#jenkins ansible_ssh_host=192.168.33.55 ansible_ssh_port=22 is_slave=true
