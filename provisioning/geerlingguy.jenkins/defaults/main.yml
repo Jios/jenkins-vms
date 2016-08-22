@@ -12,6 +12,7 @@ jenkins_master_SlaveAgentPort: 37036
 jenkins_plugins:
   - git
   - workflow-aggregator # pipeline
+  - workflow-remote-loader # load pipeline file from remote server
   - maven-plugin
   - groovy
   - groovy-postbuild
@@ -48,6 +49,8 @@ jenkins_plugins:
   - xunit
   - timestamper
   - build-publisher
+  - postbuildscript
+  - greenballs # replace blue ball with green ball for success
 
 jenkins_url_prefix: ""
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
