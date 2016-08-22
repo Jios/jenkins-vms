@@ -1,0 +1,44 @@
+def deployment(target) 
+{
+    echo 'Deploy $target'
+
+    if (target == 'develop')
+    {
+        //unstash 'develop_archive'
+        echo 'deloy develop version'
+    }
+    else
+    {
+        echo 'deply release version'
+    }
+}
+
+node 
+{
+    wrap([$class: 'AnsiColorBuildWrapper']) 
+    {
+        // Just some echoes to show the ANSI color.
+        echo "\u001B[31mI'm Red\u001B[0m Now not"
+    }
+
+    stage 'Checkout'
+   	echo 'pull source code'
+  
+  	stage 'Build'
+  	parallel (
+  		'develop': {
+  			echo "Build develop version"
+          	//stash includes: 'output/develop/*', name: 'develop_archive'
+          	//deployment('develop')
+         },
+      	'staging': {
+      		echo "Build staging version"
+      	},
+      	'production': {
+          	echo "Build production version"
+      	}
+  	)
+  
+  	stage 'Deploy'
+  	deployment('release')
+}
