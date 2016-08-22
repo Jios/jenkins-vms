@@ -40,6 +40,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     slave.vm.hostname = "slave"
     slave.vm.box = "geerlingguy/ubuntu1604"
     slave.vm.network :private_network, ip: "192.168.10.11"
+
+    # pipeline
+    slave.vm.synced_folder "slave/jenkins/workspace/pipeline-ex", "/var/lib/jenkins/workspace/pipeline-ex", 
+      create: true, #disabled: true,
+      type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=2']
   end
 
   ### 
