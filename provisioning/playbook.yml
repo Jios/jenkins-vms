@@ -7,8 +7,6 @@
     - vars/main.yml
 
   roles:
-    - geerlingguy.firewall
-    - geerlingguy.ntp
     - geerlingguy.git
     - geerlingguy.java
     - geerlingguy.jenkins
