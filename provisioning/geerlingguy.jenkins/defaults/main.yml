@@ -21,6 +21,7 @@ jenkins_plugins:
   - credentials
   - credentials-binding
   - plain-credentials
+  - cloudbees-bitbucket-branch-source
   - gitlab-plugin
   - github-organization-folder
   - ansicolor
