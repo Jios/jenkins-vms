@@ -16,6 +16,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--ioapic", "on"]
   end
 
+  config.vm.box = "geerlingguy/ubuntu1604"
 
 
   # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
@@ -23,7 +24,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # master.name = "master"
     master.ssh.insert_key = true
     master.vm.hostname = "master"
-    master.vm.box = "geerlingguy/ubuntu1604"
     master.vm.network :private_network, ip: "192.168.10.22"
   end
 
@@ -31,7 +31,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # slave.name = "slave"
     slave.ssh.insert_key = true
     slave.vm.hostname = "slave"
-    slave.vm.box = "geerlingguy/ubuntu1604"
     slave.vm.network :private_network, ip: "192.168.10.11"
   end
 
