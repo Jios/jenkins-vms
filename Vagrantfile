@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :slave do |slave|
     # slave.name = "slave"
     slave.ssh.insert_key = true
-    slave.vm.network :private_network, ip: "192.168.10.11"
+    slave.vm.network :private_network, ip: "192.168.55.11"
   end
 
   ### 
