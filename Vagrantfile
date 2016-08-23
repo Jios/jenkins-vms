@@ -16,13 +16,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--ioapic", "on"]
   end
 
-  config.vm.define :jenkins do |jenkins|
-    # jenkins.name = "jenkins"
-    jenkins.ssh.insert_key = true
-    jenkins.vm.hostname = "jenkins"
-    jenkins.vm.box = "geerlingguy/ubuntu1604"
-    jenkins.vm.network :private_network, ip: "192.168.33.55"
-  end
 
 
   # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
