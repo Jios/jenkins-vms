@@ -23,14 +23,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :master do |master|
     # master.name = "master"
     master.ssh.insert_key = true
-    master.vm.hostname = "master"
     master.vm.network :private_network, ip: "192.168.10.22"
   end
 
   config.vm.define :slave do |slave|
     # slave.name = "slave"
     slave.ssh.insert_key = true
-    slave.vm.hostname = "slave"
     slave.vm.network :private_network, ip: "192.168.10.11"
   end
 
