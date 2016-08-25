@@ -35,15 +35,15 @@ def addCredential = { credential ->
 
 // main helpers
 
-def addWithUsernameAndPassword = { username, password ->
+def addWithUsernameAndPassword = { email, password ->
 
-    name = getNameFromEmail(username)
+    username = getNameFromEmail(email)
 
     /// credentials-plugin
     //    https://github.com/jenkinsci/credentials-plugin/blob/master/src/main/java/com/cloudbees/plugins/credentials/impl/UsernamePasswordCredentialsImpl.java
     def scope       = CredentialsScope.GLOBAL
-    def id          = "${name}_http"
-    def description = "${name} with password"
+    def id          = "${username}_http"
+    def description = "${username} with password"
 
     // username & password
     def credential = new UsernamePasswordCredentialsImpl(scope, id, description, username, password) 
@@ -53,17 +53,17 @@ def addWithUsernameAndPassword = { username, password ->
     return result
 }
 
-def addWithUsernameAndSource = { username, privateKeySource ->
+def addWithUsernameAndSource = { email, privateKeySource ->
 
-    name = getNameFromEmail(username)
+    username = getNameFromEmail(email)
 
     /// ssh-credentials-plugin
     //    https://github.com/jenkinsci/ssh-credentials-plugin/blob/master/src/main/java/com/cloudbees/jenkins/plugins/sshcredentials/impl/BasicSSHUserPrivateKey.javadef scope = CredentialsScope.GLOBAL
     def scope            = CredentialsScope.GLOBAL
-    def id               = "${name}_ssh"
+    def id               = "${username}_ssh"
     def jenkins_username = "{{ jenkins_admin_username }}"
     def passphrase       = ""
-    def description      = "${name} with ssh private key"
+    def description      = "${username} with ssh private key"
 
     // with private (ssh) key from master
     // https://gist.github.com/hayderimran7/d6ab8a6a770cb970349e
