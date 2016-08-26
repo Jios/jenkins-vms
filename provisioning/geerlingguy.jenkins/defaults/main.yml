@@ -11,6 +11,7 @@ jenkins_master_SlaveAgentPort: 37036
 
 jenkins_plugins:
   - git
+  - git-changelog
   - workflow-aggregator # pipeline
   - workflow-remote-loader # load pipeline file from remote server
   - maven-plugin
