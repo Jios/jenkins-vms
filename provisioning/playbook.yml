@@ -7,6 +7,8 @@
     - vars/main.yml
 
   roles:
-    - geerlingguy.git
-    - geerlingguy.java
-    - geerlingguy.jenkins
+    - role: geerlingguy.jenkins
+      when: is_master is defined and is_master
+
+    - role: FGtatsuro.android
+      when: is_slave is defined and is_slave
