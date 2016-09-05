@@ -27,9 +27,6 @@
 - include: plugin-master-config.yml
   when: is_master is defined and is_master
 
-- include: plugin-slave-config.yml
-  when: is_slave is defined and is_slave
-
 # copy xml templates to remote machines
 - name: Configure plugins with XML templates
   template:
