@@ -27,16 +27,6 @@
   register: adminpasswordfile
 
 # install jenkins plugins using command line: jenkins-cli.jar
-- name: Install Jenkins master plugins using password.
-  command: >
-    java -jar {{ jenkins_jar_location }} -s http://{{ jenkins_hostname }}:{{ jenkins_http_port }}{{ jenkins_url_prefix | default('') }}/
-    install-plugin {{ item }}
-    --username {{ jenkins_admin_username }}
-    --password {{ jenkins_admin_password }}
-    creates=/var/lib/jenkins/plugins/{{ item }}.jpi
-  with_items: "{{ jenkins_master_plugins }}"
-  when: jenkins_admin_password != "" and is_master is defined and is_master
-
 - name: Install Jenkins plugins using password.
   command: >
     java -jar {{ jenkins_jar_location }} -s http://{{ jenkins_hostname }}:{{ jenkins_http_port }}{{ jenkins_url_prefix | default('') }}/
