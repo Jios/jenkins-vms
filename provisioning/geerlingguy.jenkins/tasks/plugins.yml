@@ -49,32 +49,6 @@
   when: adminpasswordfile.stat.exists == True
   notify: restart jenkins
 
-
-#########
-# swarm #
-#########
-
-# start swarm on jenkins slaves
-# https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin
-# http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/
-# java -jar path/to/swarm-client-jar-with-dependencies.jar
-
-- name: Creates swarm directory
-  file: path={{ jenkins_swarm_path }} state=directory
-  when: is_slave is defined and is_slave
-
-- name: Get the swarm client jarfile from server.
-  get_url:
-    url: https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.2/swarm-client-2.2-jar-with-dependencies.jar
-    dest: "{{ jenkins_swarm_path }}/swarm-client-2.2.jar"
-  register: swarm_jarfile_get
-  until: "'OK' in swarm_jarfile_get.msg or 'file already exists' in swarm_jarfile_get.msg"
-  retries: 5
-  delay: 10
-  when: is_slave is defined and is_slave
-  # when:"'groupname' in group_names"
-
-
 # configure plugins
 - include: plugin-config.yml
 
