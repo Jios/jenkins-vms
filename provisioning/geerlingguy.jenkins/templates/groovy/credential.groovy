@@ -154,8 +154,6 @@ def createCredential = { username, password ->
 
 
 // scripts
-
-createCredential('autobuild@tutk.com', 'Juda5017')
 createCredential('abs@tutk.com', null)
 
 
