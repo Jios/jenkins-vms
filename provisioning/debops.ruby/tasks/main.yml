@@ -79,8 +79,6 @@
 
 - name: Install ruby-dev
   apt: name=ruby-dev state=present
-  responses:
-        "Do you want to continue?": "Y\r"
   
 - name: Install fastlane
   shell: gem install fastlane
