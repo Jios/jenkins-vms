@@ -12,3 +12,6 @@
 
     - role: FGtatsuro.android
       when: is_slave is defined and is_slave
+
+    - role: debops.ruby
+      when: is_slave is defined and is_slave
