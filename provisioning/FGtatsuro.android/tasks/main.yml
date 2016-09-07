@@ -45,6 +45,13 @@
   when: not stat_adb_command.stat.exists
 
 - block:
+  - name: Update SDK manager
+    expect: 
+      command: "{{ android_home }}/tools/android update sdk --no-ui"
+      responses:
+        "Do you accept the license 'android-sdk-license-c81a61d9'": "y\r"
+        "Do you accept the license 'google-gdk-license-35dc2951'": "y\r"
+
   - name: Install extra components
     expect:
       command: "{{ android_home }}/tools/android update sdk -a -u -t {{ item }}"
