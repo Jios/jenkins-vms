@@ -8,6 +8,7 @@ android_sdk_timeout: 120
 android_extra_components_lockpath: "/tmp/ansible_android_extra_components.lock"
 android_extra_components: 
   - tools
+  - build-tools-23.0.2
   - build-tools-23.0.3
   - android-19
   - android-20
