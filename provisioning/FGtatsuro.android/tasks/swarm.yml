@@ -36,5 +36,9 @@
     dest: "/etc/init.d/{{ swarm_client_script }}"
     state: link
 
+- name: Update init.d bootup process by @vash
+  command: "update-rc.d -f {{ swarm_client_script }} defaults"
+  become: true
+
 - name: Execute swarm-client bash script
   shell: "{{ swarm_client_path }}/{{ swarm_client_script }}"
