@@ -86,13 +86,12 @@ def addWithUsernameAndSource = { email, privateKeySource ->
     //    https://github.com/jenkinsci/ssh-credentials-plugin/blob/master/src/main/java/com/cloudbees/jenkins/plugins/sshcredentials/impl/BasicSSHUserPrivateKey.javadef scope = CredentialsScope.GLOBAL
     def scope            = CredentialsScope.GLOBAL
     def id               = "${username}_ssh"
-    def jenkins_username = "{{ jenkins_admin_username }}"
     def passphrase       = ""
     def description      = "${username} with ssh private key"
 
     // with private (ssh) key from master
     // https://gist.github.com/hayderimran7/d6ab8a6a770cb970349e
-    def credential = new BasicSSHUserPrivateKey(scope, id, jenkins_username, privateKeySource, passphrase, description)
+    def credential = new BasicSSHUserPrivateKey(scope, id, username, privateKeySource, passphrase, description)
 
     def result = addCredential(credential)
 
