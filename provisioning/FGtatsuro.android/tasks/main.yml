@@ -1,4 +1,11 @@
 ---
+
+- name: get the current users home
+  become_user: "{{ remote_user }}"
+  shell: echo $HOME
+  register: user_home
+
+
 # tasks file for android
 - name: Run specified tasks on current platform
   include: "{{ ansible_os_family }}.yml"
