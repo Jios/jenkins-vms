@@ -49,8 +49,10 @@
     expect: 
       command: "{{ android_home }}/tools/android update sdk --no-ui"
       responses:
-        "Do you accept the license 'android-sdk-license-c81a61d9'": "y\r"
-        "Do you accept the license 'google-gdk-license-35dc2951'": "y\r"
+        "(?i)[y/n]: ": "y\r"
+        "(?i)[y/n]: ": "y\r"
+        "(?i)[y/n]: ": "y\r"
+        "(?i)[y/n]: ": "y\r"
 
   - name: Install extra components
     expect:
@@ -59,6 +61,7 @@
         "Do you accept the license": "y\r"
       timeout: "{{ android_sdk_timeout }}"
     with_items: "{{ android_extra_components }}"
+
   - name: Create lock file for extra components
     file: path="{{ android_extra_components_lockpath }}" state="touch"
   when: (android_extra_components|length != 0) and (not stat_extra_components_lockpath.stat.exists)
