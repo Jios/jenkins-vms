@@ -31,6 +31,7 @@
     mode: u=rwx,g=rx,o=rx
 
 - name: Create a symbolic link to /etc/init.d
+  become: true
   file: 
     src: "{{ swarm_client_path }}/{{ swarm_client_script }}"
     dest: "/etc/init.d/{{ swarm_client_script }}"

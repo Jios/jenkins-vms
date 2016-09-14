@@ -18,7 +18,7 @@ android_extra_components:
   - android-24
 android_extra_components_pip_executable: null
 
-swarm_client_path: "/opt/lib/jenkins/swarm"
+swarm_client_path: "/home/{{remote_user}}/jenkins/swarm"
 swarm_client: "swarm-client-2.2-jar-with-dependencies.jar"
 swarm_client_url: "https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.2/swarm-client-2.2-jar-with-dependencies.jar"
 swarm_client_script: swarm_client.sh
