@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: slave
 
   vars_files:
     - vars/main.yml
@@ -15,4 +15,5 @@
       when: is_slave is defined and is_slave
 
     - role: debops.ruby
+      become: true
       when: is_slave is defined and is_slave

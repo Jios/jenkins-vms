@@ -1,7 +1,7 @@
 ---
 ntp_timezone: Etc/UTC
 
-remote_user: vagrant
+remote_user: jian
 
 firewall_allowed_tcp_ports:
   - "22"
