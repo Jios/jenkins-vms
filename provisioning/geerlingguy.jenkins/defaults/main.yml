@@ -48,6 +48,12 @@ jenkins_plugins:
   - build-publisher
   - postbuildscript
   - greenballs # replace blue ball with green ball for success
+  - delivery-pipeline-plugin
+  - seed       # seed plugin
+  - sloccount  # https://wiki.jenkins-ci.org/display/JENKINS/SLOCCount+Plugin
+  - build-failure-analyzer  # analyzes the causes of failed builds and presents the causes on the build page
+  - claim
+  - active-directory  # @vash
 
 jenkins_url_prefix: ""
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
