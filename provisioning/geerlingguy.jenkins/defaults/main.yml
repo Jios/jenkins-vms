@@ -56,6 +56,8 @@ jenkins_plugins:
   - active-directory  # @vash
   - copyartifact
   - clone-workspace-scm
+  - fail-the-build-plugin
+  - buildgraph-view
 
 jenkins_url_prefix: ""
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
