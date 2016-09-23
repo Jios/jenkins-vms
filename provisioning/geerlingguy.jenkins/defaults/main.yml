@@ -54,6 +54,8 @@ jenkins_plugins:
   - build-failure-analyzer  # analyzes the causes of failed builds and presents the causes on the build page
   - claim
   - active-directory  # @vash
+  - copyartifact
+  - clone-workspace-scm
 
 jenkins_url_prefix: ""
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
