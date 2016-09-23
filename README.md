@@ -1,3 +1,16 @@
+### Make changes to the followings:
+```
+# provisioning/inventory
+host name
+host ip
+
+# provisioning/vars/main.yml
+remote_user: 
+
+# provisioning/playbook.yml
+hosts: 
+```
+
 # Ansible Vagrant profile for a Jenkins CI server
 
 ## add ssh keys to remote machines

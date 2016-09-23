@@ -1,9 +1,5 @@
 ---
 - hosts: all
-  remote_user: jian
-  gather_facts: yes
-  become: yes
-
   vars_files:
     - vars/main.yml
 
@@ -20,3 +16,8 @@
     - role: debops.ruby
       become: true
       when: is_slave is defined and is_slave
+
+  tasks:
+    - git_config: name=user.name scope=global value=ABS
+    - git_config: name=user.email scope=global value=abs@tutk.com
+    - git_config: name=push.default scope=global value=current

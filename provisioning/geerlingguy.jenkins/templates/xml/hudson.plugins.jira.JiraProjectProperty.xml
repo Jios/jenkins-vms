@@ -4,7 +4,7 @@
     <hudson.plugins.jira.JiraSite>
       <url>{{ jira_url }}</url>
       <useHTTPAuth>{{ jira_useHTTPAuth }}</useHTTPAuth>
-      <userName>{{ email_address }}</userName>
+      <userName>{{ email_username }}</userName>
       <password>{{ email_password }}</password>
       <supportsWikiStyleComment>{{ jira_supportsWikiStyleComment }}</supportsWikiStyleComment>
       <recordScmChanges>{{ jira_recordScmChanges }}</recordScmChanges>
