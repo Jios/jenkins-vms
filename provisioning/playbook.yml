@@ -22,3 +22,4 @@
     - git_config: name=user.name scope=global value=ABS
     - git_config: name=user.email scope=global value=abs@tutk.com
     - git_config: name=push.default scope=global value=current
+

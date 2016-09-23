@@ -32,6 +32,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     slave.vm.synced_folder "slave/jenkins/workspace/pipeline-ex", "/var/lib/jenkins/workspace/pipeline-ex", 
       create: true, #disabled: true,
       type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=2']
+
+    slave.vm.synced_folder "/Users/jianli/Repositories/jenkins-seed-job", "/var/lib/jenkins/workspace/dsl-classes", 
+      create: true, #disabled: true,
+      type: 'nfs', mount_options: ['rw', 'vers=3', 'tcp', 'fsc', 'actimeo=2']
   end
 
   ### 
