@@ -5,12 +5,12 @@ jenkins_hostname: localhost
 jenkins_http_port: 8080
 jenkins_jar_location: /opt/jenkins-cli.jar
 
-jenkins_master_plugins:
-  - swarm
 jenkins_master_SlaveAgentPort: 37036
 
 jenkins_plugins:
+  - swarm
   - git
+  - git-changelog
   - workflow-aggregator # pipeline
   - workflow-remote-loader # load pipeline file from remote server
   - maven-plugin
@@ -27,6 +27,7 @@ jenkins_plugins:
   - ansicolor
   - ssh
   - ssh-slaves
+  - ssh-agent # fix git submodule issue with credential
   - jira
   - jenkins-jira-issue-updater
   - confluence-publisher
@@ -51,8 +52,6 @@ jenkins_plugins:
 jenkins_url_prefix: ""
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false"
 
-jenkins_admin_username: admin
-jenkins_admin_password: admin
 jenkins_admin_password_file: ""
 
 

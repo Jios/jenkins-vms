@@ -1,0 +1,45 @@
+---
+#########
+# swarm #
+#########
+
+# start swarm on jenkins slaves
+# https://wiki.jenkins-ci.org/display/JENKINS/Swarm+Plugin
+# http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/
+# java -jar path/to/swarm-client-jar-with-dependencies.jar
+
+- name: Create swarm directory
+  file: path={{ swarm_client_path }} state=directory
+
+- name: Download the swarm client jarfile from server.
+  get_url:
+    url: "{{ swarm_client_url }}"
+    dest: "{{ swarm_client_path }}/{{ swarm_client }}"
+  register: swarm_jarfile_get
+  until: "'OK' in swarm_jarfile_get.msg or 'file already exists' in swarm_jarfile_get.msg"
+  retries: 5
+  delay: 10
+
+- name: swarm-client startup script
+  template:
+    src: "swarm_client.sh"
+    dest: "{{ swarm_client_path }}/{{ swarm_client_script }}"
+
+- name: Make swarm-client script executable 
+  file:
+    path: "{{ swarm_client_path }}/{{ swarm_client_script }}"
+    mode: u=rwx,g=rx,o=rx
+
+- name: Create a symbolic link to /etc/init.d
+  become: true
+  file: 
+    src: "{{ swarm_client_path }}/{{ swarm_client_script }}"
+    dest: "/etc/init.d/{{ swarm_client_script }}"
+    state: link
+
+- name: Update init.d bootup process by @vash
+  command: "update-rc.d -f {{ swarm_client_script }} defaults"
+  become: true
+
+- name: Execute swarm-client bash script
+  shell: "{{ swarm_client_path }}/{{ swarm_client_script }}"

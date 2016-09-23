@@ -7,7 +7,16 @@
   vars_files:
     - vars/main.yml
 
+  remote_user: "{{ remote_user }}"
+  gather_facts: yes
+
   roles:
-    - geerlingguy.git
-    - geerlingguy.java
-    - geerlingguy.jenkins
+    - role: geerlingguy.jenkins
+      when: is_master is defined and is_master
+
+    - role: FGtatsuro.android
+      when: is_slave is defined and is_slave
+
+    - role: debops.ruby
+      become: true
+      when: is_slave is defined and is_slave

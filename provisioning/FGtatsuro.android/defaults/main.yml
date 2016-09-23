@@ -1,0 +1,24 @@
+---
+# defaults file for android
+android_home: "/opt/android"
+android_sdk_download_url: "http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz"
+android_sdk_sha1: "725bb360f0f7d04eaccff5a2d57abdd49061326d"
+android_sdk_download_tmppath: "/tmp/android_sdk.tgz"
+android_sdk_timeout: 120
+android_extra_components_lockpath: "/tmp/ansible_android_extra_components.lock"
+android_extra_components: 
+  - tools
+  - build-tools-23.0.2
+  - build-tools-23.0.3
+  - android-19
+  - android-20
+  - android-21
+  - android-22
+  - android-23
+  - android-24
+android_extra_components_pip_executable: null
+
+swarm_client_path: "/home/{{remote_user}}/jenkins/swarm"
+swarm_client: "swarm-client-2.2-jar-with-dependencies.jar"
+swarm_client_url: "https://repo.jenkins-ci.org/releases/org/jenkins-ci/plugins/swarm-client/2.2/swarm-client-2.2-jar-with-dependencies.jar"
+swarm_client_script: swarm_client.sh

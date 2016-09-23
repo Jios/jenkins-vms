@@ -1,0 +1,94 @@
+---
+
+- name: get the current users home
+  become_user: "{{ remote_user }}"
+  shell: echo $HOME
+  register: user_home
+
+
+# tasks file for android
+- name: Run specified tasks on current platform
+  include: "{{ ansible_os_family }}.yml"
+
+- name: Check whether adb command exists
+  stat: path="{{ android_home }}/platform-tools/adb"
+  register: stat_adb_command
+  changed_when: no
+- name: Check whether lock file for extra components exists
+  stat: path="{{ android_extra_components_lockpath }}"
+  register: stat_extra_components_lockpath
+  changed_when: no
+
+- block:
+  - name: apt-get install python-pkg-resources
+    apt: name=python-pkg-resources state=present
+  - name: Install ptyprocess for automation
+    pip:
+      name: ptyprocess
+      executable: "{{ android_extra_components_pip_executable }}"
+    register: pip_ptyprocess
+  - name: Install Pexpect for automation
+    pip:
+      name: pexpect
+      executable: "{{ android_extra_components_pip_executable }}"
+    register: pip_pexpect
+  become: yes
+  when: (not stat_adb_command.stat.exists) or
+        ((android_extra_components|length != 0) and (not stat_extra_components_lockpath.stat.exists))
+
+- name: Install platform tool
+  expect:
+    command: "{{ android_home }}/tools/android update sdk -a -u -t platform-tool"
+    responses:
+      "Do you accept the license": "y\r"
+    timeout: "{{ android_sdk_timeout }}"
+  when: not stat_adb_command.stat.exists
+
+- block:
+  - name: Update SDK manager
+    expect: 
+      command: "{{ android_home }}/tools/android update sdk --no-ui"
+      responses:
+        "(?i)[y/n]: ": "y\r"
+        "(?i)[y/n]: ": "y\r"
+        "(?i)[y/n]: ": "y\r"
+        "(?i)[y/n]: ": "y\r"
+
+  - name: Install extra components
+    expect:
+      command: "{{ android_home }}/tools/android update sdk -a -u -t {{ item }}"
+      responses:
+        "Do you accept the license": "y\r"
+      timeout: "{{ android_sdk_timeout }}"
+    with_items: "{{ android_extra_components }}"
+
+  - name: Create lock file for extra components
+    file: path="{{ android_extra_components_lockpath }}" state="touch"
+  when: (android_extra_components|length != 0) and (not stat_extra_components_lockpath.stat.exists)
+
+- name: add ANDROID_HOME
+  action: lineinfile dest={{ user_home.stdout }}/.bashrc line={{ item }}
+  with_items:
+    - 'export ANDROID_HOME={{ android_home }}'
+    - 'export ANDROID_TOOLS=$ANDROID_HOME/tools/'
+    - 'export ANDROID_PLATFORM_TOOLS=$ANDROID_HOME/platform-tools/'
+    - 'export PATH=$PATH:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS'
+  sudo: no
+
+- name: Uninstall ptyprocess when it is newly installed on this role.
+  pip:
+    name: ptyprocess
+    state: absent
+    executable: "{{ android_extra_components_pip_executable }}"
+  when: pip_ptyprocess is defined and pip_ptyprocess.changed
+  become: yes
+- name: Uninstall Pexpect when it is newly installed on this role.
+  pip:
+    name: pexpect
+    state: absent
+    executable: "{{ android_extra_components_pip_executable }}"
+  when: pip_pexpect is defined and pip_pexpect.changed
+  become: yes
+
+- name: install swarm client
+  include: swarm.yml

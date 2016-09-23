@@ -1,0 +1,74 @@
+---
+# tasks file for android(On Linux)
+- name: Download Android SDK archive
+  get_url: >
+    url="{{ android_sdk_download_url }}"
+    dest="{{ android_sdk_download_tmppath }}"
+    checksum="sha1:{{ android_sdk_sha1 }}"
+    timeout="{{ android_sdk_timeout }}"
+  register: get_url_sdk_archive
+- name: Check whether android command exists
+  stat: path="{{ android_home }}/tools/android"
+  register: stat_android_command
+  changed_when: no
+- block:
+  - name: Clear existing android_home if re-install is needed
+    file: path="{{ android_home }}" state="absent"
+  - name: Clear lock file for extra components if re-install is needed
+    file: path="{{ android_extra_components_lockpath }}" state="absent"
+  become: yes
+  when: stat_android_command.stat.exists and get_url_sdk_archive.changed
+- name: Ensure android_home exists
+  file:
+    path: "{{ android_home }}"
+    state: "directory"
+  become: yes
+
+# NOTE: In This task, following warning message will be printed if 'warn' attribute isn't 'no'.
+# '[WARNING]: Consider using unarchive module rather than running tar'
+#
+# As this warning message says, unarchive module can handle file download with http/ftp.
+# But this module can't use checksum, thus it seems taht target file is always downloaded on playbook running.
+#
+# To avoid unnecessary download, I use get_url module.
+# In this case, unarchive module can't be used because this module can't handle file on provision target.
+# For this reason, I use command module with tar command as workaround.
+- name: Extract Android SDK into android_home
+  command: "tar --no-same-permissions --no-same-owner -xzf {{ android_sdk_download_tmppath }} -C {{ android_home }} --strip 1"
+  when: (not stat_android_command.stat.exists) or get_url_sdk_archive.changed
+  become: yes
+  args:
+    warn: False
+- name: Add executable flags to binaries under tools directory
+  file:
+    path: "{{ android_home }}/tools"
+    state: "directory"
+    mode: "0755"
+    recurse: yes
+  become: yes
+- block:
+  - name: Ensure kvm group exists
+    group:
+      name: 'kvm'
+      state: present
+  - name: Append specified user to kvm group for operation of Android emulator
+    user:
+      name: "{{ android_emulator_kvm_user }}"
+      groups: 'kvm'
+      append: yes
+  - name: Check whether /dev/kvm exists
+    stat:
+      path: '/dev/kvm'
+    register: stat_dev_kvm
+    changed_when: no
+  - name: Create /dev/kvm
+    command: 'mknod /dev/kvm c 10 232'
+    when: not stat_dev_kvm.stat.exists
+  - name: Set file attributes of /dev/kvm
+    file:
+      path: '/dev/kvm'
+      owner: 'root'
+      group: 'kvm'
+      mode: 'g+rw'
+  become: yes
+  when: android_emulator_kvm_user is defined
